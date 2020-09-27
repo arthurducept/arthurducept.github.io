@@ -2,14 +2,34 @@ header img{
     width: 180px;
 }
 
+header .social a{
+    border-radius: 50%;
+    background-color: rgb(175, 175, 175);
+    color: white;
+    display: inline-block;
+    text-align: center;
+    height: 36px;
+    width: 36px;
+}
+
+header .social .fa{
+    font-size: 20px;
+    margin-top: 8px;
+}
+
 @media (min-width: 576px) {
-    
+
 }
 
 @media (max-width: 768px){
     .header .profile-image{
         float: none !important;
         margin: 0 auto;
+    }
+
+    .header .profile-content{
+        float: none !important;
+        text-align: center;
     }
 }
 
