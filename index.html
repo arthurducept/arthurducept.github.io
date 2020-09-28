@@ -18,11 +18,11 @@
 
 <body>
     <header class="header">
-        <div class="jumbotron text-center clearfix" style="margin-bottom:0">
+        <div id="headContainer" class="container clearfix">
             <img class="profile-image img-fluid float-left rounded-circle" src="ressources/Images/ArthurPP.png" alt="Arthur DUCEPT">
-            <div class="profile-content">
+            <div class="profile-content float-left">
                 <h1 class="name">Arthur Ducept</h1>
-                <h2 class="desc"><small>Etudiant d&eacute;veloppeur MSc Pro Epitech</small></h2>
+                <h2 class="desc"><small>Pre-MSc Pro Epitech</small></h2>
                 <ul class="social list-inline">
                     <li class="list-inline-item">
                         <a href="https://twitter.com/DuceptArthur"><i class="fa fa-twitter"></i></a>
@@ -32,6 +32,7 @@
                     </li>
                 </ul>
             </div>
+        <a href="mailto:arthur.ducept@gmail.com" target="_blank" class="btn btn-cta-primary float-right"><i class="fa fa-enveloppe"></i> Me contacter</a>
         </div>
 
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -54,10 +55,30 @@
             </div>
         </nav>
     </header>
-    <main>
-        <h2>Website creation in progress...</h2>
-        <section></section>
-        <aside></aside>
+    <main class="container sections-wrapper">
+        <div class="row">
+            <div class="primary col-lg-8 col-12">
+                <section class="about section">
+                    <div class="section-inner shadow-sm rounded">
+                        <h2 class="heading">A propos de moi</h2>
+                        <div class="content">
+                            <p>
+                                Actuellement à Epitech Nantes, je suis un étudiant motivé, consciencieux dans mon travail et j’aime être méthodique dans mon organisation. Je suis avant tout passionné par les technologies Web mais je m'intéresse tout autant au développement en général.
+                                <br>Je suis également curieux de nature et j’apprécie toutes les activités enrichissantes culturellement ou de façon sportive.
+                            </p>
+                         
+                        </div>
+                    </div>               
+                </section>
+            </div>
+            <div class="secondary col-lg-4 col-12">
+                <aside class="info aside section">
+                    <div class="section-inner shadow-sm rounded">
+
+                    </div>
+                </aside>
+            </div>
+        </div>
     </main>
     <footer></footer>
 </body>
