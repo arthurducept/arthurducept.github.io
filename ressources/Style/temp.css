@@ -1,0 +1,303 @@
+/*Home page CSS style */
+
+
+/*#region General*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body,
+header,
+main,
+footer,
+footer ul,
+main section,
+address {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    min-width: 320px;
+    width: 100%;
+    min-height: 100vh;
+    color: white;
+    justify-content: space-between;
+    background-color: #111;
+    background-image: url("../Images/background/Main_background.jpeg");
+    backdrop-filter: brightness(18%) blur(20px) contrast(120%);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+li {
+    list-style: none;
+    margin: 0 20px;
+}
+
+a,
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+/*#endregion*/
+
+
+/*#region Header*/
+
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 0 100px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header #Home {
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+    float: left;
+    font-weight: lighter;
+}
+
+header nav {
+    float: right;
+}
+
+header nav ul {
+    display: flex;
+}
+
+header nav ul li a {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+header nav ul li a:hover {
+    color: gray;
+}
+
+.menu-toggle {
+    color: white;
+    float: right;
+    line-height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+
+/*#endregion*/
+
+
+/*#region Main*/
+
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+main section {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+main section h1 {
+    margin-top: 50px;
+    font-size: 50px;
+    letter-spacing: 17.5px;
+    font-weight: lighter;
+}
+
+main section h2 {
+    font-size: 30px;
+    letter-spacing: 7px;
+    font-weight: normal;
+}
+
+main section h2,
+main section p {
+    text-transform: uppercase;
+}
+
+main section p {
+    font-size: 44px;
+    letter-spacing: 18.5px;
+}
+
+
+/*#endregion*/
+
+
+/*#region Footer*/
+
+footer {
+    width: 100%;
+}
+
+footer ul {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 20px;
+}
+
+.social a {
+    border-radius: 50%;
+    background-color: rgb(122, 122, 122);
+    color: white;
+    display: flex;
+    text-align: center;
+    height: 40px;
+    width: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.social .fa {
+    font-size: 20px;
+}
+
+address {
+    margin: 20px 0 30px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+address p,
+address a {
+    margin: 0 4px;
+}
+
+
+/*#endregion*/
+
+
+/*#region Media*/
+
+@media (max-width: 991px) {
+    /*#region Dropdown*/
+    header {
+        padding: 0 20px;
+    }
+    .menu-toggle {
+        display: block;
+        z-index: 2;
+    }
+    header nav {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        background: #333;
+        top: -100vh;
+        left: 0%;
+        transition: 0.5s;
+        z-index: 0;
+    }
+    header nav.active {
+        top: 0px;
+    }
+    header nav ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    header nav ul li {
+        display: flex;
+        width: 100%;
+        line-height: 90px;
+        height: 90px;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        font-size: 30px;
+        font-weight: bold;
+        font-variant-caps: all-petite-caps;
+    }
+    header nav ul li:hover {
+        background-color: #222;
+    }
+    /*#endregion*/
+    /*#region Main*/
+    main section h1 {
+        margin-top: 30px;
+        font-size: 30px;
+        letter-spacing: 12.5px;
+        font-weight: lighter;
+    }
+    main section h2 {
+        font-size: 20px;
+        letter-spacing: 4px;
+        font-weight: normal;
+    }
+    main section p {
+        font-size: 28px;
+        letter-spacing: 13.5px;
+    }
+    /*#endregion*/
+    /*#region Footer*/
+    address {
+        flex-direction: column;
+    }
+    /*#endregion*/
+}
+
+@media (max-width: 450px) {
+    /*#region Main*/
+    main section h1 {
+        margin-top: 15px;
+        font-size: 15px;
+        letter-spacing: 6px;
+        font-weight: lighter;
+    }
+    main section h2 {
+        font-size: 10px;
+        letter-spacing: 2px;
+        font-weight: normal;
+    }
+    main section p {
+        font-size: 14px;
+        letter-spacing: 7px;
+    }
+    /*#endregion*/
+    /*#region Footer*/
+    footer ul {
+        margin: 0 5px;
+    }
+    address p,
+    address a {
+        margin: 0;
+        font-size: 12px;
+    }
+    /*#endregion*/
+}
+
+
+/*#endregion*/
