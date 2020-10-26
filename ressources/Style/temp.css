@@ -1,29 +1,120 @@
-*{
+/*Home page CSS style */
+
+
+/*#region General*/
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-body{
-    width: 100%;
-    min-height: 100vh;
-    background: rgb(30, 30, 30);
-    color: white;
-}
-
-.flex {
+body,
+main,
+footer,
+main section,
+address {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
-h2{
+body {
+    width: 100%;
+    min-height: 100vh;
+    color: white;
+    justify-content: space-between;
+    background-image: url("../Images/background/Main_background.jpeg");
+    backdrop-filter: brightness(18%) blur(20px) contrast(120%);
+    background-size: cover;
+}
+
+li {
+    list-style: none;
+}
+
+
+/*#endregion*/
+
+
+/*region Header*/
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 100px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header #Home {
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+    float: left;
+    font-weight: lighter;
+}
+
+header nav {
+    float: right;
+}
+
+header nav ul {
+    display: flex;
+}
+
+header nav ul li a {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+header nav ul li a:hover {
+    color: gray;
+}
+
+.menu-toggle {
+    color: white;
+    float: right;
+    line-height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+
+/*endregion Header*/
+
+
+/*#region Main*/
+
+main section h2 {
     text-transform: uppercase;
 }
 
-.social a{
+
+/*#endregion*/
+
+
+/*#region Footer*/
+
+footer {
+    width: 100%;
+}
+
+footer ul {
+    width: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.social a {
     border-radius: 50%;
     background-color: rgb(122, 122, 122);
     color: white;
@@ -33,7 +124,69 @@ h2{
     width: 36px;
 }
 
-.social .fa{
+.social .fa {
     font-size: 20px;
     margin-top: 8px;
 }
+
+
+/*#endregion*/
+
+
+/*#region Media*/
+
+@media (max-width: 991px) {
+    /*#region Dropdown*/
+    header {
+        padding: 0 20px;
+    }
+    .menu-toggle {
+        display: block;
+        z-index: 2;
+    }
+    header nav {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        background: #333;
+        top: -100vh;
+        left: 0%;
+        transition: 0.5s;
+        z-index: 0;
+    }
+    header nav.active {
+        top: 0px;
+    }
+    header nav ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    header nav ul li {
+        display: flex;
+        width: 100%;
+        line-height: 90px;
+        height: 90px;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        font-size: 30px;
+        font-weight: bold;
+        font-variant-caps: all-petite-caps;
+    }
+    header nav ul li:hover {
+        background-color: #222;
+    }
+    /*#endregion*/
+}
+
+@media (min-width: 992px) {
+    body {
+        background-position: -150px;
+    }
+}
+
+
+/*#endregion*/
