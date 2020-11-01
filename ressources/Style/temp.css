@@ -30,7 +30,8 @@ body {
     color: white;
     justify-content: space-between;
     background-color: #111;
-    background-image: url("../Images/background/Main_background.jpeg");
+    background-image: url("../Images/background/Main_background-min.jpeg");
+    -webkit-backdrop-filter: brightness(18%) blur(20px) contrast(120%);
     backdrop-filter: brightness(18%) blur(20px) contrast(120%);
     background-repeat: no-repeat;
     background-size: cover;
