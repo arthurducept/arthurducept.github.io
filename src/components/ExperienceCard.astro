@@ -1,0 +1,71 @@
+---
+import Tag from './ui/Tag.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'experience'>;
+  typeLabel: string;
+  employerLabel: string;
+  clientLabel: string;
+}
+
+const { entry, typeLabel, employerLabel, clientLabel } = Astro.props;
+const { company, employer, client, role, period, location, type, tech, highlights } = entry.data;
+---
+
+<div class="relative pl-8 pb-12 border-l border-gray-light last:pb-0 group">
+  <div class="absolute left-0 top-0 -translate-x-1/2 w-3 h-3 rounded-full bg-white border-2 border-gold group-hover:bg-gold transition-colors"></div>
+
+  <div class="bg-white p-6 border border-gray-light hover:border-gold/40 transition-colors ml-4">
+    <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+      <div>
+        <h3 class="font-bold text-navy text-lg">{role}</h3>
+        <p class="text-gold font-thin tracking-wide">{company}</p>
+      </div>
+      <span class="text-xs tracking-widest uppercase border border-navy/20 text-navy/60 px-2 py-1 flex-shrink-0">
+        {typeLabel}
+      </span>
+    </div>
+
+    {(employer || client) && (
+      <div class="flex flex-wrap gap-4 text-xs text-navy/50 mb-4">
+        {employer && (
+          <span><span class="font-bold uppercase tracking-wide">{employerLabel}:</span> {employer}</span>
+        )}
+        {client && (
+          <span><span class="font-bold uppercase tracking-wide">{clientLabel}:</span> {client}</span>
+        )}
+      </div>
+    )}
+
+    <div class="flex flex-wrap gap-3 text-xs text-navy/50 mb-5">
+      <span class="flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        {period}
+      </span>
+      <span class="flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        </svg>
+        {location}
+      </span>
+    </div>
+
+    <ul class="space-y-2 mb-5">
+      {highlights.map((h) => (
+        <li class="text-sm text-gray-700 font-thin flex gap-2">
+          <span class="text-gold mt-0.5 flex-shrink-0">›</span>
+          {h}
+        </li>
+      ))}
+    </ul>
+
+    <div class="flex flex-wrap gap-2">
+      {tech.map((t) => (
+        <Tag label={t} />
+      ))}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import SectionTitle from '../ui/SectionTitle.astro';
+import ExperienceCard from '../ExperienceCard.astro';
+import type { Translation } from '../../i18n/types';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  t: Translation;
+}
+
+const { lang, t } = Astro.props;
+
+const allExp = await getCollection('experience', ({ data }) => data.lang === lang);
+const sorted = allExp.sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="experience" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionTitle title={t.experience.sectionTitle} />
+
+    <div class="max-w-3xl">
+      {sorted.map((entry) => (
+        <ExperienceCard
+          entry={entry}
+          typeLabel={t.experience.types[entry.data.type]}
+          employerLabel={t.experience.employer}
+          clientLabel={t.experience.client}
+        />
+      ))}
+    </div>
+  </div>
+</section>

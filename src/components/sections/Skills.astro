@@ -1,0 +1,30 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import Tag from '../ui/Tag.astro';
+import type { Translation } from '../../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+---
+
+<section id="skills" class="py-24 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionTitle title={t.skills.sectionTitle} />
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {t.skills.categories.map((category) => (
+        <div class="bg-white p-6 border border-gray-light hover:border-gold/40 transition-colors">
+          <h3 class="text-xs tracking-[0.2em] uppercase text-gold mb-4 font-bold">{category.name}</h3>
+          <div class="flex flex-wrap gap-2">
+            {category.skills.map((skill) => (
+              <Tag label={skill} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

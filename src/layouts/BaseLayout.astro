@@ -1,0 +1,59 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/nav/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import type { Translation } from '../i18n/types';
+import type { Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  t: Translation;
+  title?: string;
+  description?: string;
+}
+
+const {
+  lang,
+  t,
+  title = `Arthur Ducept — ${t.hero.subtitle}`,
+  description = lang === 'fr'
+    ? "Ingénieur logiciel fullstack avec 5 ans d'expérience. Disponible pour des missions freelance et des postes en CDI à Toulouse ou en remote."
+    : "Fullstack software engineer with 5 years of experience. Available for freelance missions and full-time contracts in Toulouse or remote.",
+} = Astro.props;
+
+const siteUrl = 'https://arthurducept.fr';
+const canonicalEn = siteUrl + '/';
+const canonicalFr = siteUrl + '/fr/';
+const canonical = lang === 'fr' ? canonicalFr : canonicalEn;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={canonicalEn} />
+    <link rel="alternate" hreflang="fr" href={canonicalFr} />
+    <link rel="alternate" hreflang="x-default" href={canonicalEn} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <Navbar lang={lang} t={t} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} t={t} />
+  </body>
+</html>

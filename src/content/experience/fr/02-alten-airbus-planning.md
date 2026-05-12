@@ -1,0 +1,16 @@
+---
+company: "Alten / Airbus"
+employer: "Alten"
+client: "Airbus"
+role: "Ingénieur Fullstack"
+period: "Jan 2024 – Jul 2025"
+location: "Toulouse, France"
+type: "contract"
+tech: ["React", "NestJS", "TypeScript", "PostgreSQL", "AWS", "REST"]
+highlights:
+  - "Reconstruction complète d'un outil de planification critique — gain de 99,5% sur les temps de chargement"
+  - "Conception et implémentation de l'architecture fullstack sur AWS : frontend React, backend NestJS"
+  - "Livraison end-to-end : architecture, développement, tests et déploiement AWS"
+order: 2
+lang: "fr"
+---

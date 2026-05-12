@@ -1,0 +1,30 @@
+---
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const enHref = '/';
+const frHref = '/fr/';
+---
+
+<div class="hidden md:flex items-center gap-1 text-sm tracking-widest">
+  <a
+    href={enHref}
+    class={`px-2 py-1 transition-colors ${lang === 'en' ? 'text-gold font-bold' : 'text-white/60 hover:text-white'}`}
+    aria-current={lang === 'en' ? 'page' : undefined}
+  >
+    EN
+  </a>
+  <span class="text-white/30">|</span>
+  <a
+    href={frHref}
+    class={`px-2 py-1 transition-colors ${lang === 'fr' ? 'text-gold font-bold' : 'text-white/60 hover:text-white'}`}
+    aria-current={lang === 'fr' ? 'page' : undefined}
+  >
+    FR
+  </a>
+</div>

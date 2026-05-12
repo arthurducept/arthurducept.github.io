@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'FieldworkGeo';
+  src: url('/fonts/FieldworkGeo-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FieldworkGeo';
+  src: url('/fonts/FieldworkGeo-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FieldworkGeo';
+  src: url('/fonts/FieldworkGeo-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-navy: #232F4C;
+  --color-navy-dark: #1a2338;
+  --color-navy-light: #2e3d62;
+  --color-gold: #A99060;
+  --color-gold-light: #bda878;
+  --color-gold-dark: #8a7449;
+  --color-gray-light: #DCDCDC;
+
+  --font-family-sans: 'FieldworkGeo', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-family-sans);
+    color: #111;
+    background-color: #fff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}

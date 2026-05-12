@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import SectionTitle from '../ui/SectionTitle.astro';
+import ProjectCard from '../ProjectCard.astro';
+import type { Translation } from '../../i18n/types';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  t: Translation;
+}
+
+const { lang, t } = Astro.props;
+
+const allProjects = await getCollection('projects', ({ data }) => data.lang === lang);
+const sorted = allProjects.sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="projects" class="py-24 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <SectionTitle title={t.projects.sectionTitle} />
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sorted.map((entry) => (
+        <ProjectCard entry={entry} />
+      ))}
+    </div>
+  </div>
+</section>

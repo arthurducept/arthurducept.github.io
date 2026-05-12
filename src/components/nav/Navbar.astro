@@ -1,0 +1,74 @@
+---
+import LangSwitcher from './LangSwitcher.astro';
+import MobileMenu from './MobileMenu.tsx';
+import type { Translation } from '../../i18n/types';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  t: Translation;
+}
+
+const { lang, t } = Astro.props;
+
+const base = lang === 'fr' ? '/fr' : '';
+
+const navLinks = [
+  { href: `${base}/#about`, label: t.nav.about },
+  { href: `${base}/#skills`, label: t.nav.skills },
+  { href: `${base}/#experience`, label: t.nav.experience },
+  { href: `${base}/#projects`, label: t.nav.projects },
+  { href: `${base}/#contact`, label: t.nav.contact },
+];
+
+const altLangHref = lang === 'en' ? '/fr/' : '/';
+const altLangLabel = lang === 'en' ? 'FR' : 'EN';
+---
+
+<header
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-navy/95 backdrop-blur-sm"
+>
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href={`${base}/`} class="flex-shrink-0">
+      <img
+        src="/images/logo/logo-horizontal-white.svg"
+        alt="Arthur Ducept"
+        class="h-8 w-auto"
+        loading="eager"
+      />
+    </a>
+
+    <div class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-white/80 hover:text-gold text-sm tracking-wide transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="flex items-center gap-4">
+      <LangSwitcher lang={lang} />
+      <MobileMenu
+        client:load
+        navLinks={navLinks}
+        langHref={altLangHref}
+        langLabel={altLangLabel}
+      />
+    </div>
+  </nav>
+</header>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      navbar?.classList.add('shadow-lg');
+    } else {
+      navbar?.classList.remove('shadow-lg');
+    }
+  });
+</script>
