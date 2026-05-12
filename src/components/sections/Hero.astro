@@ -60,20 +60,48 @@ const base = lang === "fr" ? "/fr" : "";
       <!-- Photo -->
       <div class="flex-shrink-0 hidden md:block">
         <div class="relative w-72 h-72 lg:w-80 lg:h-80">
-          <!-- Gold accent border -->
-          <div
-            class="absolute inset-0 border-2 border-gold/40 translate-x-3 translate-y-3"
-          >
+
+          <!-- Dotted grid accent (top-left) -->
+          <div class="absolute -top-6 -left-6 grid grid-cols-6 gap-1.5 opacity-50" aria-hidden="true">
+            {Array.from({ length: 36 }).map(() => (
+              <span class="w-1 h-1 bg-gold rounded-full"></span>
+            ))}
           </div>
-          <img
-            src="/images/photo.png"
-            alt="Arthur Ducept"
-            class="relative w-full h-full object-cover"
-            style="object-position: center 30%; transform: scale(1.4); transform-origin: center 40%;"
-            loading="eager"
-          />
+
+          <!-- Offset gold frame (with matching corner cut) -->
+          <div
+            class="absolute inset-0 border-2 border-gold/50 translate-x-4 translate-y-4"
+            style="clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 0 100%);"
+            aria-hidden="true"
+          ></div>
+
+          <!-- Photo with cut top-right corner -->
+          <div
+            class="relative w-full h-full overflow-hidden"
+            style="clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 0 100%);"
+          >
+            <img
+              src="/images/photo.png"
+              alt="Arthur Ducept"
+              class="w-full h-full object-cover"
+              style="object-position: center 15%; transform: scale(1.4); transform-origin: center 90%;"
+              loading="eager"
+            />
+          </div>
+
+          <!-- Gold line accent (bottom-left) -->
+          <div class="absolute -bottom-3 -left-3 h-0.5 w-20 bg-gold" aria-hidden="true"></div>
+          <div class="absolute -bottom-3 -left-3 w-0.5 h-10 bg-gold" aria-hidden="true"></div>
+
+          <!-- Diagonal line in cut corner (top-right) -->
+          <div
+            class="absolute top-0 right-0 w-12 h-0.5 bg-gold origin-right"
+            style="transform: rotate(-45deg) translateX(2px);"
+            aria-hidden="true"
+          ></div>
         </div>
       </div>
+      <!-- /Photo -->
     </div>
   </div>
 
