@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ExperiencePage from '../components/pages/ExperiencePage.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} t={t} title={`${t.pages.experience.title} — Arthur Ducept`}>
+  <ExperiencePage lang={lang} t={t} />
+</BaseLayout>

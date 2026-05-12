@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectDetailPage from '../../components/pages/ProjectDetailPage.astro';
+import { useTranslations } from '../../i18n/utils';
+
+export async function getStaticPaths() {
+  const all = await getCollection('projects', ({ data }) => data.lang === 'en');
+  return all.map((entry) => ({
+    params: { slug: entry.data.urlSlug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const lang = 'en' as const;
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} t={t} title={`${entry.data.title} — Arthur Ducept`}>
+  <ProjectDetailPage entry={entry} lang={lang} t={t} />
+</BaseLayout>

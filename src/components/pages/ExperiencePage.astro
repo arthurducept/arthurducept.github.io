@@ -1,0 +1,156 @@
+---
+import { getCollection } from 'astro:content';
+import SectionTitle from '../ui/SectionTitle.astro';
+import Tag from '../ui/Tag.astro';
+import type { Translation } from '../../i18n/types';
+import type { Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  t: Translation;
+}
+
+const { lang, t } = Astro.props;
+const p = t.pages.experience;
+
+const all = await getCollection('experience', ({ data }) => data.lang === lang);
+const sorted = all.sort((a, b) => a.data.order - b.data.order);
+
+// Extract a year-ish "anchor" from the period (e.g. "Sep 2025 – Present" → "2025 →")
+function yearAnchor(period: string): string {
+  const match = period.match(/(\d{4})/);
+  return match ? match[1] : period;
+}
+---
+
+<section class="pt-32 pb-12 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-8">
+      <SectionTitle title={p.title} />
+      <p class="text-base text-gray-700 font-thin max-w-2xl mx-auto mt-4">{p.subtitle}</p>
+    </div>
+  </div>
+</section>
+
+<!-- Horizontal timeline rail -->
+<section class="pb-32 bg-white">
+  <!-- Scroll hint -->
+  <div class="max-w-6xl mx-auto px-6 mb-6 flex items-center justify-end gap-2 text-xs tracking-[0.3em] uppercase text-navy/40">
+    <span>{p.scrollHint}</span>
+  </div>
+
+  <div
+    id="timeline-scroll"
+    class="overflow-x-auto pb-12 timeline-scroll cursor-grab active:cursor-grabbing"
+  >
+    <div class="relative inline-flex items-stretch px-[10vw] py-8 min-w-full">
+      <!-- The horizontal rail line -->
+      <div class="absolute top-[140px] left-0 right-0 h-px bg-gold/30" aria-hidden="true"></div>
+
+      {sorted.map((entry, idx) => {
+        const d = entry.data;
+        return (
+          <div class="relative flex-shrink-0 w-[360px] mr-12 last:mr-0">
+            <!-- Year anchor (above rail) -->
+            <div class="h-[100px] flex items-end mb-4">
+              <span class="text-5xl font-bold text-gold leading-none">{yearAnchor(d.period)}</span>
+            </div>
+
+            <!-- Dot on rail -->
+            <div class="relative h-10 flex items-start justify-start">
+              <div class="absolute top-0 left-2 w-4 h-4 rounded-full bg-white border-2 border-gold ring-4 ring-white"></div>
+              <div class="absolute top-2 left-6 h-px w-12 bg-gold/40"></div>
+            </div>
+
+            <!-- Card -->
+            <article class="bg-white border border-gray-light hover:border-gold/40 transition-colors p-6 shadow-sm">
+              <p class="text-xs tracking-widest uppercase text-navy/50 mb-2">{d.period}</p>
+              <h3 class="font-bold text-navy text-lg leading-tight mb-1">{d.role}</h3>
+              <p class="text-gold font-thin tracking-wide mb-3">{d.company}</p>
+
+              {(d.employer || d.client) && (
+                <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-navy/50 mb-4">
+                  {d.employer && (
+                    <span><span class="font-bold uppercase tracking-wide">{t.experience.employer}:</span> {d.employer}</span>
+                  )}
+                  {d.client && (
+                    <span><span class="font-bold uppercase tracking-wide">{t.experience.client}:</span> {d.client}</span>
+                  )}
+                </div>
+              )}
+
+              <ul class="space-y-1.5 mb-4">
+                {d.highlights.map((h) => (
+                  <li class="text-sm text-gray-700 font-thin flex gap-2 leading-snug">
+                    <span class="text-gold mt-0.5 flex-shrink-0">›</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="flex flex-wrap gap-2 pt-3 border-t border-gray-light">
+                {d.tech.map((tech) => (
+                  <Tag label={tech} />
+                ))}
+              </div>
+            </article>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline-scroll {
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: #A99060 transparent;
+  }
+  .timeline-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+  .timeline-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .timeline-scroll::-webkit-scrollbar-thumb {
+    background: #A99060;
+    border-radius: 3px;
+  }
+  .timeline-scroll > div > div {
+    scroll-snap-align: start;
+  }
+</style>
+
+<script>
+  // Drag-to-scroll behaviour
+  const scroller = document.getElementById('timeline-scroll');
+  if (scroller) {
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    scroller.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - scroller.offsetLeft;
+      scrollLeft = scroller.scrollLeft;
+    });
+    scroller.addEventListener('mouseleave', () => { isDown = false; });
+    scroller.addEventListener('mouseup', () => { isDown = false; });
+    scroller.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - scroller.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      scroller.scrollLeft = scrollLeft - walk;
+    });
+
+    // Horizontal scroll on vertical wheel (when mouse over rail)
+    scroller.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        scroller.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+  }
+</script>

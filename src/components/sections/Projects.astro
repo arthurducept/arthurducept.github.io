@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import SectionTitle from '../ui/SectionTitle.astro';
 import ProjectCard from '../ProjectCard.astro';
+import ReadMoreLink from '../ui/ReadMoreLink.astro';
 import type { Translation } from '../../i18n/types';
 import type { Lang } from '../../i18n/utils';
 
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const { lang, t } = Astro.props;
+const base = lang === 'fr' ? '/fr' : '';
 
 const allProjects = await getCollection('projects', ({ data }) => data.lang === lang);
 const sorted = allProjects.sort((a, b) => a.data.order - b.data.order);
@@ -22,8 +24,14 @@ const sorted = allProjects.sort((a, b) => a.data.order - b.data.order);
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {sorted.map((entry) => (
-        <ProjectCard entry={entry} />
+        <a href={`${base}/projects/${entry.data.urlSlug}`} class="block">
+          <ProjectCard entry={entry} />
+        </a>
       ))}
+    </div>
+
+    <div class="mt-12">
+      <ReadMoreLink href={`${base}/projects`} label={t.common.readMore} />
     </div>
   </div>
 </section>

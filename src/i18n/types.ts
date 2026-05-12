@@ -4,12 +4,59 @@ export interface SkillCategory {
 }
 
 export interface Translation {
+  common: {
+    readMore: string;
+    viewProject: string;
+    backToProjects: string;
+    backHome: string;
+  };
   nav: {
     about: string;
     skills: string;
     experience: string;
     projects: string;
     contact: string;
+  };
+  pages: {
+    about: {
+      title: string;
+      intro: string;
+      philosophyTitle: string;
+      philosophy: string;
+      educationTitle: string;
+      educationItems: { school: string; degree: string; period: string }[];
+      interestsTitle: string;
+      interests: string[];
+    };
+    skills: {
+      title: string;
+      strongTitle: string;
+      strongDescription: string;
+      openToTitle: string;
+      openToDescription: string;
+      openTo: { name: string; skills: string[] }[];
+      methodsTitle: string;
+      methodsDescription: string;
+    };
+    experience: {
+      title: string;
+      subtitle: string;
+      scrollHint: string;
+    };
+    projects: {
+      title: string;
+      subtitle: string;
+      detailLabels: {
+        context: string;
+        solution: string;
+        role: string;
+        architecture: string;
+        results: string;
+        techStack: string;
+        client: string;
+        period: string;
+      };
+    };
   };
   hero: {
     title: string;

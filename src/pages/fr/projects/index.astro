@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectsListPage from '../../../components/pages/ProjectsListPage.astro';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout lang={lang} t={t} title={`${t.pages.projects.title} — Arthur Ducept`}>
+  <ProjectsListPage lang={lang} t={t} />
+</BaseLayout>

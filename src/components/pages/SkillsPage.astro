@@ -1,0 +1,73 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import Tag from '../ui/Tag.astro';
+import type { Translation } from '../../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+const p = t.pages.skills;
+---
+
+<section class="pt-32 pb-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-20">
+      <SectionTitle title={p.title} />
+    </div>
+
+    <!-- Daily / Strong -->
+    <div class="mb-24">
+      <div class="max-w-3xl mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-navy mb-3">{p.strongTitle}</h2>
+        <p class="text-base text-gray-700 font-thin leading-relaxed">{p.strongDescription}</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {t.skills.categories.map((category) => (
+          <div class="bg-white p-6 border border-gray-light hover:border-gold/40 transition-colors">
+            <h3 class="text-xs tracking-[0.2em] uppercase text-gold mb-4 font-bold">{category.name}</h3>
+            <div class="flex flex-wrap gap-2">
+              {category.skills.map((skill) => (
+                <Tag label={skill} />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Open to / Curious -->
+    <div class="mb-24">
+      <div class="max-w-3xl mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-navy mb-3">{p.openToTitle}</h2>
+        <p class="text-base text-gray-700 font-thin leading-relaxed">{p.openToDescription}</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {p.openTo.map((category) => (
+          <div class="bg-navy/3 p-6 border border-dashed border-navy/20 hover:border-gold/40 transition-colors">
+            <h3 class="text-xs tracking-[0.2em] uppercase text-navy/50 mb-4 font-bold">{category.name}</h3>
+            <div class="flex flex-wrap gap-2">
+              {category.skills.map((skill) => (
+                <span class="text-sm text-navy/70 font-thin">· {skill}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Methods & principles -->
+    <div class="bg-navy text-white p-10 md:p-12 relative overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-end pointer-events-none" aria-hidden="true">
+        <img src="/images/logo/logo-icon-white.svg" alt="" class="w-[300px] opacity-[0.04] translate-x-1/4" />
+      </div>
+      <div class="relative max-w-3xl">
+        <h2 class="text-xs tracking-[0.3em] uppercase text-gold mb-4 font-bold">{p.methodsTitle}</h2>
+        <p class="text-base text-white/80 font-thin leading-relaxed">{p.methodsDescription}</p>
+      </div>
+    </div>
+  </div>
+</section>

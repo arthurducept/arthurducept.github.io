@@ -14,11 +14,11 @@ const { lang, t } = Astro.props;
 const base = lang === 'fr' ? '/fr' : '';
 
 const navLinks = [
-  { href: `${base}/#about`, label: t.nav.about },
-  { href: `${base}/#skills`, label: t.nav.skills },
-  { href: `${base}/#experience`, label: t.nav.experience },
-  { href: `${base}/#projects`, label: t.nav.projects },
-  { href: `${base}/#contact`, label: t.nav.contact },
+  { href: `${base}/about`, label: t.nav.about },
+  { href: `${base}/skills`, label: t.nav.skills },
+  { href: `${base}/experience`, label: t.nav.experience },
+  { href: `${base}/projects`, label: t.nav.projects },
+  { href: `#contact`, label: t.nav.contact },
 ];
 
 const altLangHref = lang === 'en' ? '/fr/' : '/';

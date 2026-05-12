@@ -1,13 +1,17 @@
 ---
 import SectionTitle from '../ui/SectionTitle.astro';
 import Tag from '../ui/Tag.astro';
+import ReadMoreLink from '../ui/ReadMoreLink.astro';
 import type { Translation } from '../../i18n/types';
+import type { Lang } from '../../i18n/utils';
 
 interface Props {
+  lang: Lang;
   t: Translation;
 }
 
-const { t } = Astro.props;
+const { lang, t } = Astro.props;
+const base = lang === 'fr' ? '/fr' : '';
 ---
 
 <section id="skills" class="py-24 bg-gray-50">
@@ -25,6 +29,10 @@ const { t } = Astro.props;
           </div>
         </div>
       ))}
+    </div>
+
+    <div class="mt-12">
+      <ReadMoreLink href={`${base}/skills`} label={t.common.readMore} />
     </div>
   </div>
 </section>

@@ -1,0 +1,55 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import type { Translation } from '../../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+const p = t.pages.about;
+---
+
+<section class="pt-32 pb-24 bg-white">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <SectionTitle title={p.title} />
+    </div>
+
+    <p class="text-lg text-gray-700 font-thin leading-relaxed mb-16 first-letter:text-5xl first-letter:font-bold first-letter:text-navy first-letter:mr-2 first-letter:float-left first-letter:leading-none">
+      {p.intro}
+    </p>
+
+    <div class="mb-20">
+      <h2 class="text-xs tracking-[0.3em] uppercase text-gold mb-4 font-bold">{p.philosophyTitle}</h2>
+      <p class="text-base text-gray-700 font-thin leading-relaxed">{p.philosophy}</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-16 mb-20">
+      <div>
+        <h2 class="text-xs tracking-[0.3em] uppercase text-gold mb-6 font-bold">{p.educationTitle}</h2>
+        <ul class="space-y-5">
+          {p.educationItems.map((e) => (
+            <li class="border-l-2 border-gold/40 pl-4">
+              <p class="font-bold text-navy">{e.school}</p>
+              <p class="text-sm text-gray-700 font-thin">{e.degree}</p>
+              <p class="text-xs text-navy/40 mt-1">{e.period}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-xs tracking-[0.3em] uppercase text-gold mb-6 font-bold">{p.interestsTitle}</h2>
+        <ul class="space-y-3">
+          {p.interests.map((item) => (
+            <li class="text-sm text-gray-700 font-thin flex gap-2">
+              <span class="text-gold mt-0.5 flex-shrink-0">›</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

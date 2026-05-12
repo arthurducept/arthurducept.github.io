@@ -21,14 +21,22 @@ const experience = defineCollection({
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
   schema: z.object({
+    urlSlug: z.string(),
     title: z.string(),
     client: z.string(),
+    period: z.string().optional(),
     description: z.string(),
     tech: z.array(z.string()),
     metrics: z.array(z.string()),
     tag: z.string().optional(),
     order: z.number(),
     lang: z.enum(['en', 'fr']),
+    // Detail page fields
+    context: z.string(),
+    solution: z.string(),
+    role: z.string(),
+    architecture: z.string(),
+    results: z.array(z.string()),
   }),
 });
 

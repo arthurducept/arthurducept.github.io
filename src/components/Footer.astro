@@ -9,8 +9,9 @@ interface Props {
   t: Translation;
 }
 
-const { t } = Astro.props;
+const { lang, t } = Astro.props;
 const year = new Date().getFullYear();
+const homeHref = lang === 'fr' ? '/fr/' : '/';
 ---
 
 <footer id="contact" class="bg-navy relative overflow-hidden">
@@ -58,7 +59,7 @@ const year = new Date().getFullYear();
   <!-- Footer bar -->
   <div class="relative">
     <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
-      <a href="/">
+      <a href={homeHref}>
         <img
           src="/images/logo/logo-icon-white.svg"
           alt="Arthur Ducept"

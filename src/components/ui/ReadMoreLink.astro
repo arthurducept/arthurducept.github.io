@@ -1,0 +1,19 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  dark?: boolean;
+}
+
+const { href, label, dark = false } = Astro.props;
+---
+
+<a
+  href={href}
+  class={`group inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase font-bold transition-colors ${
+    dark ? 'text-gold hover:text-gold-light' : 'text-navy hover:text-gold'
+  }`}
+>
+  {label}
+  <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+</a>

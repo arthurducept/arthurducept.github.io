@@ -1,0 +1,121 @@
+---
+import Tag from '../ui/Tag.astro';
+import type { Translation } from '../../i18n/types';
+import type { Lang } from '../../i18n/utils';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+  lang: Lang;
+  t: Translation;
+}
+
+const { entry, lang, t } = Astro.props;
+const d = entry.data;
+const labels = t.pages.projects.detailLabels;
+const base = lang === 'fr' ? '/fr' : '';
+---
+
+<article class="pt-32 pb-24 bg-white">
+  <div class="max-w-4xl mx-auto px-6">
+    <!-- Back link -->
+    <a
+      href={`${base}/projects`}
+      class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-navy/60 hover:text-gold transition-colors mb-8"
+    >
+      ← {t.common.backToProjects}
+    </a>
+
+    <!-- Header -->
+    <header class="mb-16 pb-12 border-b border-gray-light">
+      {d.tag && (
+        <span class="inline-block text-xs tracking-widest uppercase text-gold border border-gold/30 px-2 py-0.5 mb-4">
+          {d.tag}
+        </span>
+      )}
+      <h1 class="text-4xl md:text-5xl font-bold text-navy leading-tight mb-4">
+        {d.title}
+      </h1>
+
+      <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-navy/60 mb-6">
+        <span>
+          <span class="font-bold uppercase tracking-widest text-xs text-navy/40 mr-2">{labels.client}</span>
+          {d.client}
+        </span>
+        {d.period && (
+          <span>
+            <span class="font-bold uppercase tracking-widest text-xs text-navy/40 mr-2">{labels.period}</span>
+            {d.period}
+          </span>
+        )}
+      </div>
+
+      <p class="text-lg text-gray-700 font-thin leading-relaxed">{d.description}</p>
+    </header>
+
+    <!-- Context -->
+    <section class="mb-16">
+      <h2 class="text-xs tracking-[0.3em] uppercase text-gold mb-4 font-bold">{labels.context}</h2>
+      <p class="text-base text-gray-700 font-thin leading-relaxed">{d.context}</p>
+    </section>
+
+    <!-- Solution -->
+    <section class="mb-16">
+      <h2 class="text-xs tracking-[0.3em] uppercase text-gold mb-4 font-bold">{labels.solution}</h2>
+      <p class="text-base text-gray-700 font-thin leading-relaxed">{d.solution}</p>
+    </section>
+
+    <!-- Role -->
+    <section class="mb-16 bg-navy/3 p-8 border-l-2 border-gold">
+      <h2 class="text-xs tracking-[0.3em] uppercase text-navy/60 mb-4 font-bold">{labels.role}</h2>
+      <p class="text-base text-gray-700 font-thin leading-relaxed">{d.role}</p>
+    </section>
+
+    <!-- Architecture & stack -->
+    <section class="mb-16">
+      <h2 class="text-xs tracking-[0.3em] uppercase text-gold mb-4 font-bold">{labels.architecture}</h2>
+      <p class="text-base text-gray-700 font-thin leading-relaxed mb-6">{d.architecture}</p>
+
+      <h3 class="text-xs tracking-[0.2em] uppercase text-navy/50 mb-3 font-bold">{labels.techStack}</h3>
+      <div class="flex flex-wrap gap-2">
+        {d.tech.map((tech) => (
+          <Tag label={tech} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="mb-16 bg-navy text-white p-10 relative overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-end pointer-events-none" aria-hidden="true">
+        <img src="/images/logo/logo-icon-white.svg" alt="" class="w-[280px] opacity-[0.05] translate-x-1/4" />
+      </div>
+      <div class="relative">
+        <h2 class="text-xs tracking-[0.3em] uppercase text-gold mb-6 font-bold">{labels.results}</h2>
+        <ul class="space-y-3">
+          {d.results.map((r) => (
+            <li class="flex gap-3 text-base text-white/85 font-thin leading-relaxed">
+              <span class="text-gold mt-0.5 flex-shrink-0">›</span>
+              <span>{r}</span>
+            </li>
+          ))}
+        </ul>
+
+        {d.metrics.length > 0 && (
+          <div class="flex flex-wrap gap-6 mt-8 pt-8 border-t border-white/15">
+            {d.metrics.map((m) => (
+              <span class="text-xl font-bold text-gold">{m}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- Back link bottom -->
+    <a
+      href={`${base}/projects`}
+      class="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-navy/60 hover:text-gold transition-colors"
+    >
+      ← {t.common.backToProjects}
+    </a>
+  </div>
+</article>

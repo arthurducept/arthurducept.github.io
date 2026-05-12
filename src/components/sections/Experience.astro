@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import SectionTitle from '../ui/SectionTitle.astro';
 import ExperienceCard from '../ExperienceCard.astro';
+import ReadMoreLink from '../ui/ReadMoreLink.astro';
 import type { Translation } from '../../i18n/types';
 import type { Lang } from '../../i18n/utils';
 
@@ -11,9 +12,11 @@ interface Props {
 }
 
 const { lang, t } = Astro.props;
+const base = lang === 'fr' ? '/fr' : '';
 
 const allExp = await getCollection('experience', ({ data }) => data.lang === lang);
 const sorted = allExp.sort((a, b) => a.data.order - b.data.order);
+const preview = sorted.slice(0, 3);
 ---
 
 <section id="experience" class="py-24 bg-white">
@@ -21,7 +24,7 @@ const sorted = allExp.sort((a, b) => a.data.order - b.data.order);
     <SectionTitle title={t.experience.sectionTitle} />
 
     <div class="max-w-3xl">
-      {sorted.map((entry) => (
+      {preview.map((entry) => (
         <ExperienceCard
           entry={entry}
           typeLabel={t.experience.types[entry.data.type]}
@@ -29,6 +32,10 @@ const sorted = allExp.sort((a, b) => a.data.order - b.data.order);
           clientLabel={t.experience.client}
         />
       ))}
+    </div>
+
+    <div class="mt-4">
+      <ReadMoreLink href={`${base}/experience`} label={t.common.readMore} />
     </div>
   </div>
 </section>
