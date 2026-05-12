@@ -1,0 +1,30 @@
+---
+import Contact from './sections/Contact.astro';
+import Footer from './Footer.astro';
+import type { Translation } from '../i18n/types';
+import type { Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  t: Translation;
+}
+
+const { lang, t } = Astro.props;
+---
+
+<div class="relative overflow-hidden">
+  <!-- Shared logo watermark spanning Contact + Footer -->
+  <div
+    class="absolute inset-0 flex items-center justify-end pointer-events-none"
+    aria-hidden="true"
+  >
+    <img
+      src="/images/logo/logo-icon-white.svg"
+      alt=""
+      class="w-[600px] max-w-none opacity-[0.04] translate-x-1/4"
+    />
+  </div>
+
+  <Contact t={t} />
+  <Footer lang={lang} t={t} />
+</div>
