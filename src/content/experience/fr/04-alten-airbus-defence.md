@@ -12,6 +12,6 @@ tech: ["Angular", "Java", "Spring Boot", "REST"]
 highlights:
   - "Développement de fonctionnalités pour une application de gestion des droits d'accès chez Airbus Defence & Space"
   - "Travail en équipe Agile cross-fonctionnelle sur le frontend Angular et le backend Java Spring Boot"
-order: 4
+order: 6
 lang: "fr"
 ---

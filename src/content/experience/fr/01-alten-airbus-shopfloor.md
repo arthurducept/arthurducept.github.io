@@ -12,6 +12,6 @@ highlights:
   - "Lead technique sur la reprise d'un portefeuille critique de 500+ applications legacy VB6/VB.NET"
   - "Conception et livraison d'une application web sur-mesure pour digitaliser le transfert de connaissances au sein d'un programme de 80 personnes"
   - "Définition des standards d'architecture front-end, audits de sécurité et feuille de route de modernisation vers React"
-order: 1
+order: 2
 lang: "fr"
 ---
