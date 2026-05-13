@@ -50,6 +50,15 @@ const en: Translation = {
       title: 'Experience',
       subtitle: '5 years across Airbus programs, freelance missions, and a work-study at Avoloi.',
       scrollHint: 'Drag horizontally to explore →',
+      now: 'Now',
+      legendTitle: 'Engagement type',
+      overlapNote: 'Each row is a parallel professional track. Where bars sit on the same vertical column, the engagements ran at the same time.',
+      laneLabels: {
+        contract: 'Alten — Consulting',
+        freelance: 'Freelance',
+        workstudy: 'Studies & work-study',
+        fulltime: 'Full-time',
+      },
     },
 
     projects: {

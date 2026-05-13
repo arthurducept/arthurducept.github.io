@@ -13,144 +13,263 @@ interface Props {
 const { lang, t } = Astro.props;
 const p = t.pages.experience;
 
-const all = await getCollection('experience', ({ data }) => data.lang === lang);
-const sorted = all.sort((a, b) => a.data.order - b.data.order);
-
-// Extract a year-ish "anchor" from the period (e.g. "Sep 2025 – Present" → "2025 →")
-function yearAnchor(period: string): string {
-  const match = period.match(/(\d{4})/);
-  return match ? match[1] : period;
+function toMonthNumber(ym: string): number {
+  const [y, m] = ym.split('-').map(Number);
+  return y + (m - 1) / 12;
 }
+
+const today = new Date();
+const nowMonthNumber = today.getFullYear() + today.getMonth() / 12;
+
+const all = await getCollection('experience', ({ data }) => data.lang === lang);
+
+const entries = all.map((entry) => {
+  const start = toMonthNumber(entry.data.startDate);
+  const end = entry.data.endDate ? toMonthNumber(entry.data.endDate) : nowMonthNumber;
+  return { entry, start, end, type: entry.data.type };
+});
+
+const minYear = Math.floor(Math.min(...entries.map((e) => e.start)));
+const maxYear = Math.ceil(Math.max(...entries.map((e) => e.end), nowMonthNumber));
+const totalRange = maxYear - minYear;
+const years: number[] = [];
+for (let y = minYear; y <= maxYear; y++) years.push(y);
+
+const pct = (v: number) => ((v - minYear) / totalRange) * 100;
+
+// Lane order: top = most recent / "active" type first
+type LaneType = 'contract' | 'freelance' | 'workstudy' | 'fulltime';
+const laneOrder: LaneType[] = ['contract', 'freelance', 'workstudy', 'fulltime'];
+const laneEntries: Record<LaneType, typeof entries> = {
+  contract: entries.filter((e) => e.type === 'contract').sort((a, b) => a.start - b.start),
+  freelance: entries.filter((e) => e.type === 'freelance').sort((a, b) => a.start - b.start),
+  workstudy: entries.filter((e) => e.type === 'workstudy').sort((a, b) => a.start - b.start),
+  fulltime: entries.filter((e) => e.type === 'fulltime').sort((a, b) => a.start - b.start),
+};
+const activeLanes = laneOrder.filter((l) => laneEntries[l].length > 0);
+
+const ROW_HEIGHT = 96; // px per swim lane
+
+// Bar visual styles per lane type
+const laneStyles: Record<LaneType, {
+  barBg: string;
+  barAccent: string;
+  barText: string;
+  labelText: string;
+  laneBg: string;
+}> = {
+  contract: {
+    barBg: 'bg-gradient-to-br from-navy to-navy-light',
+    barAccent: 'border-l-4 border-gold',
+    barText: 'text-white',
+    labelText: 'text-navy',
+    laneBg: 'bg-navy/[0.025]',
+  },
+  freelance: {
+    barBg: 'bg-gradient-to-br from-gold to-gold-light',
+    barAccent: 'border-l-4 border-navy',
+    barText: 'text-white',
+    labelText: 'text-gold-dark',
+    laneBg: 'bg-gold/[0.04]',
+  },
+  workstudy: {
+    barBg: 'bg-white',
+    barAccent: 'border border-navy/40 border-l-4 border-l-navy',
+    barText: 'text-navy',
+    labelText: 'text-navy/70',
+    laneBg: 'bg-gray-50',
+  },
+  fulltime: {
+    barBg: 'bg-gradient-to-br from-navy-light to-navy',
+    barAccent: 'border-l-4 border-gold',
+    barText: 'text-white',
+    labelText: 'text-navy',
+    laneBg: 'bg-navy/[0.025]',
+  },
+};
+
+// Most-recent-first for the detailed cards below
+const chronological = [...entries].sort((a, b) => b.start - a.start);
 ---
 
 <section class="pt-32 pb-12 bg-white">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="text-center mb-8">
-      <SectionTitle title={p.title} />
-      <p class="text-base text-gray-700 font-thin max-w-2xl mx-auto mt-4">{p.subtitle}</p>
-    </div>
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <SectionTitle title={p.title} />
+    <p class="text-base text-gray-700 font-thin max-w-2xl mx-auto mt-4">{p.subtitle}</p>
   </div>
 </section>
 
-<!-- Horizontal timeline rail -->
-<section class="pb-32 bg-white">
-  <!-- Scroll hint -->
-  <div class="max-w-6xl mx-auto px-6 mb-6 flex items-center justify-end gap-2 text-xs tracking-[0.3em] uppercase text-navy/40">
-    <span>{p.scrollHint}</span>
-  </div>
+<!-- Swim-lane Gantt -->
+<section class="pb-16 bg-white">
+  <div class="max-w-6xl mx-auto px-4 md:px-6">
+    <div class="relative bg-white border border-gray-light shadow-sm overflow-x-auto">
 
-  <div
-    id="timeline-scroll"
-    class="overflow-x-auto pb-12 timeline-scroll cursor-grab active:cursor-grabbing"
-  >
-    <div class="relative inline-flex items-stretch px-[10vw] py-8 min-w-full">
-      <!-- The horizontal rail line -->
-      <div class="absolute top-[140px] left-0 right-0 h-px bg-gold/30" aria-hidden="true"></div>
+      <div class="min-w-[820px] grid" style={`grid-template-columns: 200px 1fr;`}>
 
-      {sorted.map((entry, idx) => {
-        const d = entry.data;
-        return (
-          <div class="relative flex-shrink-0 w-[360px] mr-12 last:mr-0">
-            <!-- Year anchor (above rail) -->
-            <div class="h-[100px] flex items-end mb-4">
-              <span class="text-5xl font-bold text-gold leading-none">{yearAnchor(d.period)}</span>
-            </div>
-
-            <!-- Dot on rail -->
-            <div class="relative h-10 flex items-start justify-start">
-              <div class="absolute top-0 left-2 w-4 h-4 rounded-full bg-white border-2 border-gold ring-4 ring-white"></div>
-              <div class="absolute top-2 left-6 h-px w-12 bg-gold/40"></div>
-            </div>
-
-            <!-- Card -->
-            <article class="bg-white border border-gray-light hover:border-gold/40 transition-colors p-6 shadow-sm">
-              <p class="text-xs tracking-widest uppercase text-navy/50 mb-2">{d.period}</p>
-              <h3 class="font-bold text-navy text-lg leading-tight mb-1">{d.role}</h3>
-              <p class="text-gold font-thin tracking-wide mb-3">{d.company}</p>
-
-              {(d.employer || d.client) && (
-                <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs text-navy/50 mb-4">
-                  {d.employer && (
-                    <span><span class="font-bold uppercase tracking-wide">{t.experience.employer}:</span> {d.employer}</span>
-                  )}
-                  {d.client && (
-                    <span><span class="font-bold uppercase tracking-wide">{t.experience.client}:</span> {d.client}</span>
-                  )}
-                </div>
-              )}
-
-              <ul class="space-y-1.5 mb-4">
-                {d.highlights.map((h) => (
-                  <li class="text-sm text-gray-700 font-thin flex gap-2 leading-snug">
-                    <span class="text-gold mt-0.5 flex-shrink-0">›</span>
-                    <span>{h}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div class="flex flex-wrap gap-2 pt-3 border-t border-gray-light">
-                {d.tech.map((tech) => (
-                  <Tag label={tech} />
-                ))}
+        <!-- Header row -->
+        <div class="border-b border-gray-light bg-navy/[0.02] px-6 py-5 flex items-end">
+          <span class="text-[10px] tracking-[0.3em] uppercase text-navy/50 font-bold">{p.legendTitle}</span>
+        </div>
+        <div class="border-b border-gray-light bg-navy/[0.02] relative h-16 overflow-hidden">
+          <!-- Year markers — anchor first to left, last to right, middle centered -->
+          {years.map((y, i) => {
+            const left = pct(y);
+            const isFirst = i === 0;
+            const isLast = i === years.length - 1;
+            const transformClass = isFirst ? '' : isLast ? '-translate-x-full' : '-translate-x-1/2';
+            return (
+              <div
+                class={`absolute bottom-2 ${transformClass}`}
+                style={`left: ${left}%;`}
+              >
+                <span class={`text-sm font-bold ${y === today.getFullYear() ? 'text-gold' : 'text-navy/40'}`}>{y}</span>
               </div>
-            </article>
+            );
+          })}
+          <!-- "Now" badge -->
+          <div
+            class="absolute top-2 -translate-x-1/2 z-10"
+            style={`left: ${pct(nowMonthNumber)}%;`}
+          >
+            <span class="inline-block bg-gold text-white text-[9px] tracking-[0.2em] uppercase px-2 py-0.5 font-bold whitespace-nowrap">
+              ● {p.now}
+            </span>
           </div>
-        );
-      })}
+        </div>
+
+        <!-- Swim lanes -->
+        {activeLanes.map((laneType) => {
+          const style = laneStyles[laneType];
+          const items = laneEntries[laneType];
+          return (
+            <>
+              <!-- Lane label -->
+              <div class={`${style.laneBg} border-b border-gray-light px-6 flex items-center`} style={`height: ${ROW_HEIGHT}px;`}>
+                <div class="flex flex-col">
+                  <span class={`text-[10px] tracking-[0.25em] uppercase ${style.labelText} font-bold mb-1`}>
+                    {laneType === 'contract' ? '⬢' : laneType === 'freelance' ? '◆' : laneType === 'workstudy' ? '○' : '■'}
+                  </span>
+                  <span class={`text-sm font-bold ${style.labelText} leading-tight`}>
+                    {p.laneLabels[laneType]}
+                  </span>
+                  <span class="text-[10px] text-navy/40 mt-1">
+                    {items.length} {items.length === 1 ? (lang === 'fr' ? 'engagement' : 'engagement') : (lang === 'fr' ? 'engagements' : 'engagements')}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Lane track -->
+              <div class={`${style.laneBg} border-b border-gray-light relative overflow-hidden`} style={`height: ${ROW_HEIGHT}px;`}>
+                <!-- Year gridlines -->
+                {years.map((y, i) => {
+                  const left = pct(y);
+                  const isLast = i === years.length - 1;
+                  return (
+                    <div
+                      class={`absolute top-0 bottom-0 w-px bg-navy/5 ${isLast ? '-translate-x-full' : ''}`}
+                      style={`left: ${left}%;`}
+                      aria-hidden="true"
+                    ></div>
+                  );
+                })}
+                <!-- Now line -->
+                <div
+                  class="absolute top-0 bottom-0 w-px bg-gold/40"
+                  style={`left: ${pct(nowMonthNumber)}%;`}
+                  aria-hidden="true"
+                ></div>
+
+                <!-- Bars -->
+                {items.map((e) => {
+                  const left = pct(e.start);
+                  const width = Math.max(pct(e.end) - left, 2);
+                  const isPresent = !e.entry.data.endDate;
+                  return (
+                    <a
+                      href={`#exp-${e.entry.id}`}
+                      class={`group absolute top-1/2 -translate-y-1/2 ${style.barBg} ${style.barAccent} ${style.barText} px-3 py-2.5 shadow-md hover:shadow-xl hover:scale-[1.02] hover:z-10 transition-all flex flex-col justify-center overflow-hidden`}
+                      style={`left: ${left}%; width: ${width}%; height: 64px;`}
+                      title={`${e.entry.data.role} — ${e.entry.data.company} (${e.entry.data.period})`}
+                    >
+                      <p class="text-sm font-bold truncate leading-tight">
+                        {e.entry.data.client || e.entry.data.company.replace(/^.*\//, '').trim()}
+                      </p>
+                      <p class="text-[10px] opacity-75 truncate tracking-wide">{e.entry.data.role}</p>
+                      {isPresent && (
+                        <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-white shadow-lg ring-2 ring-gold animate-pulse" aria-hidden="true"></span>
+                      )}
+                    </a>
+                  );
+                })}
+              </div>
+            </>
+          );
+        })}
+
+      </div>
     </div>
+
+    <p class="text-xs text-navy/40 mt-4 max-w-3xl">{p.overlapNote}</p>
   </div>
 </section>
 
-<style>
-  .timeline-scroll {
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: #A99060 transparent;
-  }
-  .timeline-scroll::-webkit-scrollbar {
-    height: 6px;
-  }
-  .timeline-scroll::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .timeline-scroll::-webkit-scrollbar-thumb {
-    background: #A99060;
-    border-radius: 3px;
-  }
-  .timeline-scroll > div > div {
-    scroll-snap-align: start;
-  }
-</style>
+<!-- Detailed cards -->
+<section class="pb-32 bg-gray-50 pt-16">
+  <div class="max-w-4xl mx-auto px-6 space-y-6">
+    {chronological.map((e) => {
+      const d = e.entry.data;
+      const isPresent = !d.endDate;
+      const style = laneStyles[d.type as LaneType];
+      return (
+        <article
+          id={`exp-${e.entry.id}`}
+          class="bg-white border border-gray-light hover:border-gold/40 transition-colors p-6 md:p-8 scroll-mt-24"
+        >
+          <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+            <div>
+              <p class="text-xs tracking-widest uppercase text-navy/50 mb-1">{d.period}</p>
+              <h3 class="font-bold text-navy text-xl leading-tight">{d.role}</h3>
+              <p class="text-gold font-thin tracking-wide">{d.company}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class={`text-xs tracking-widest uppercase ${style.barBg} ${style.barText} ${d.type === 'workstudy' ? 'border border-navy/40' : ''} px-2 py-1 font-bold`}>
+                {t.experience.types[d.type]}
+              </span>
+              {isPresent && (
+                <span class="inline-flex items-center gap-1 text-xs text-gold">
+                  <span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse"></span>
+                  {p.now}
+                </span>
+              )}
+            </div>
+          </div>
 
-<script>
-  // Drag-to-scroll behaviour
-  const scroller = document.getElementById('timeline-scroll');
-  if (scroller) {
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
+          <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-navy/50 mb-4">
+            {d.employer && (
+              <span><span class="font-bold uppercase tracking-wide">{t.experience.employer}:</span> {d.employer}</span>
+            )}
+            {d.client && (
+              <span><span class="font-bold uppercase tracking-wide">{t.experience.client}:</span> {d.client}</span>
+            )}
+            <span>📍 {d.location}</span>
+          </div>
 
-    scroller.addEventListener('mousedown', (e) => {
-      isDown = true;
-      startX = e.pageX - scroller.offsetLeft;
-      scrollLeft = scroller.scrollLeft;
-    });
-    scroller.addEventListener('mouseleave', () => { isDown = false; });
-    scroller.addEventListener('mouseup', () => { isDown = false; });
-    scroller.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - scroller.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      scroller.scrollLeft = scrollLeft - walk;
-    });
+          <ul class="space-y-2 mb-5">
+            {d.highlights.map((h) => (
+              <li class="text-sm text-gray-700 font-thin flex gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">›</span>
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
 
-    // Horizontal scroll on vertical wheel (when mouse over rail)
-    scroller.addEventListener('wheel', (e) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        scroller.scrollLeft += e.deltaY;
-      }
-    }, { passive: false });
-  }
-</script>
+          <div class="flex flex-wrap gap-2 pt-4 border-t border-gray-light">
+            {d.tech.map((t) => (
+              <Tag label={t} />
+            ))}
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</section>

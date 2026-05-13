@@ -2,6 +2,8 @@
 company: "Avoloi"
 role: "Développeur Fullstack"
 period: "Jan 2021 – Jul 2023"
+startDate: "2021-01"
+endDate: "2023-07"
 location: "Nantes, France"
 type: "workstudy"
 tech: ["Vue.js", "Express.js", "Node.js", "PostgreSQL", "JavaScript"]

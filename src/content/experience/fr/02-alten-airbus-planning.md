@@ -4,6 +4,8 @@ employer: "Alten"
 client: "Airbus"
 role: "Ingénieur Fullstack"
 period: "Jan 2024 – Jul 2025"
+startDate: "2024-01"
+endDate: "2025-07"
 location: "Toulouse, France"
 type: "contract"
 tech: ["React", "NestJS", "TypeScript", "PostgreSQL", "AWS", "REST"]

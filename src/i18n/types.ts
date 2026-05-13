@@ -42,6 +42,15 @@ export interface Translation {
       title: string;
       subtitle: string;
       scrollHint: string;
+      now: string;
+      legendTitle: string;
+      overlapNote: string;
+      laneLabels: {
+        contract: string;
+        freelance: string;
+        workstudy: string;
+        fulltime: string;
+      };
     };
     projects: {
       title: string;

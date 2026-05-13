@@ -4,6 +4,7 @@ employer: "Alten"
 client: "Airbus"
 role: "Lead Ingénieur Front-End"
 period: "Sep 2025 – Aujourd'hui"
+startDate: "2025-09"
 location: "Toulouse, France"
 type: "contract"
 tech: ["React", "TypeScript", "VB6", "VB.NET", "C#", ".NET", "Azure DevOps"]

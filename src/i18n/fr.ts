@@ -50,6 +50,15 @@ const fr: Translation = {
       title: 'Expérience',
       subtitle: '5 années entre les programmes Airbus, des missions freelance et une alternance chez Avoloi.',
       scrollHint: 'Faites défiler horizontalement →',
+      now: "Aujourd'hui",
+      legendTitle: "Type d'engagement",
+      overlapNote: "Chaque ligne est une trajectoire professionnelle parallèle. Quand des barres occupent la même colonne verticale, les engagements ont tourné en même temps.",
+      laneLabels: {
+        contract: 'Alten — Consulting',
+        freelance: 'Freelance',
+        workstudy: 'Études & alternance',
+        fulltime: 'CDI',
+      },
     },
 
     projects: {

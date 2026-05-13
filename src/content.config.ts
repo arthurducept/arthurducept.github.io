@@ -9,6 +9,8 @@ const experience = defineCollection({
     client: z.string().optional(),
     role: z.string(),
     period: z.string(),
+    startDate: z.string(), // YYYY-MM
+    endDate: z.string().optional(), // YYYY-MM, undefined = present
     location: z.string(),
     type: z.enum(['contract', 'freelance', 'fulltime', 'workstudy']),
     tech: z.array(z.string()),
