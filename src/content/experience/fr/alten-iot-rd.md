@@ -13,6 +13,5 @@ highlights:
   - "R&D et IoT : conception d'une solution de maintenance prédictive destinée à l'analyse vibratoire de tapis roulants industriels"
   - "Intelligence Artificielle Embarquée : intégration d'un modèle de Machine Learning (NanoEdgeAI) en C sur microcontrôleur STM32 pour détecter les anomalies en temps réel (Edge Computing)"
   - "Connectivité : développement de la couche réseau via le protocole MQTT pour assurer la transmission des données vers la supervision centrale"
-order: 3
 lang: "fr"
 ---

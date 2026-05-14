@@ -15,7 +15,6 @@ const experience = defineCollection({
     type: z.enum(['contract', 'freelance', 'fulltime', 'workstudy']),
     tech: z.array(z.string()),
     highlights: z.array(z.string()),
-    order: z.number(),
     lang: z.enum(['en', 'fr']),
   }),
 });

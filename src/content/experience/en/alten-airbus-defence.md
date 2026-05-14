@@ -12,6 +12,5 @@ tech: ["Angular", "Java", "Spring Boot", "REST"]
 highlights:
   - "Developed features for an access rights management application serving Airbus Defence & Space"
   - "Worked in a cross-functional Agile team across both Angular frontend and Java Spring Boot backend"
-order: 6
 lang: "en"
 ---

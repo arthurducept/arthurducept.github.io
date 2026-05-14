@@ -13,6 +13,5 @@ highlights:
   - "R&D / IoT: designed a predictive maintenance solution for vibration analysis on industrial conveyor belts"
   - "Embedded AI: integrated a NanoEdgeAI machine-learning model in C on STM32 microcontrollers to detect anomalies in real time at the edge"
   - "Connectivity: built the network layer over MQTT to stream telemetry to the central supervision system"
-order: 3
 lang: "en"
 ---

@@ -10,6 +10,5 @@ highlights:
   - "Building a product catalog app exposing supplier offers to client buyers"
   - "Container shipping price estimator: clients request quotes for delivery based on selected products and quantities"
   - "Second freelance mission with Meating — building on the trust earned from the expenses management MVP"
-order: 1
 lang: "en"
 ---

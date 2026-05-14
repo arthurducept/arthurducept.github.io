@@ -12,6 +12,5 @@ highlights:
   - "Technical lead on the takeover of a critical portfolio of 500+ legacy VB6/VB.NET applications"
   - "Designed and delivered a custom web application to digitize knowledge transfer across the 80-person program"
   - "Defined front-end architecture standards, conducted security audits, and built a modernization roadmap toward React"
-order: 2
 lang: "en"
 ---
