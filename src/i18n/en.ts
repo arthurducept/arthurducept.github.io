@@ -174,6 +174,7 @@ const en: Translation = {
           { label: 'Activity', value: 'Freelance software development' },
           { label: 'Address', value: '4 square Félix Bloch, 85300 Challans, France' },
           { label: 'SIRET', value: '943 183 301 00010' },
+          { label: 'VAT', value: 'VAT not applicable, art. 293 B of the French General Tax Code' },
           { label: 'Email', value: 'contact@arthurducept.fr', href: 'mailto:contact@arthurducept.fr' },
         ],
       },
