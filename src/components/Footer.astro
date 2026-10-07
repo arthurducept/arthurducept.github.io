@@ -12,6 +12,7 @@ interface Props {
 const { lang, t } = Astro.props;
 const year = new Date().getFullYear();
 const homeHref = lang === 'fr' ? '/fr/' : '/';
+const legalHref = lang === 'fr' ? '/fr/mentions-legales' : '/mentions-legales';
 ---
 
 <footer id="contact" class="bg-navy relative overflow-hidden">
@@ -68,7 +69,9 @@ const homeHref = lang === 'fr' ? '/fr/' : '/';
       </a>
 
       <p class="text-white/40 text-sm text-center">
-        © {year} Arthur Ducept. {t.footer.rights}
+        © {year} Arthur Ducept EI. {t.footer.rights}
+        <span aria-hidden="true"> · </span>
+        <a href={legalHref} class="hover:text-gold transition-colors underline">{t.footer.legal}</a>
       </p>
 
       <div class="flex items-center gap-6">

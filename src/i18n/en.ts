@@ -160,6 +160,50 @@ const en: Translation = {
   footer: {
     rights: 'All rights reserved.',
     madeWith: 'Built with Astro',
+    legal: 'Legal notice',
+  },
+
+  legal: {
+    title: 'Legal notice',
+    updated: 'Last updated: October 2026',
+    sections: [
+      {
+        title: 'Publisher',
+        lines: [
+          { label: 'Name', value: 'Arthur Ducept, entrepreneur individuel (EI)' },
+          { label: 'Activity', value: 'Freelance software development' },
+          { label: 'Address', value: '4 square Félix Bloch, 85300 Challans, France' },
+          { label: 'SIRET', value: '943 183 301 00010' },
+          { label: 'Email', value: 'contact@arthurducept.fr', href: 'mailto:contact@arthurducept.fr' },
+        ],
+      },
+      {
+        title: 'Publication director',
+        lines: [{ label: 'Name', value: 'Arthur Ducept' }],
+      },
+      {
+        title: 'Hosting',
+        lines: [
+          { label: 'Host', value: 'GitHub, Inc. (GitHub Pages)' },
+          { label: 'Address', value: '88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, United States' },
+          { label: 'Website', value: 'https://pages.github.com', href: 'https://pages.github.com' },
+        ],
+      },
+      {
+        title: 'Personal data and cookies',
+        text: [
+          'This website does not use cookies or trackers, and does not collect personal data through forms.',
+          'If you email me, your address and message are used only to reply to you and are not shared with third parties. You can ask me to access or delete them at any time at contact@arthurducept.fr.',
+          'Fonts and images are served from this site. External links (LinkedIn, GitHub) are governed by the privacy policies of those services.',
+        ],
+      },
+      {
+        title: 'Intellectual property',
+        text: [
+          'Unless otherwise stated, the content of this site (texts, logos, design, code) is the property of Arthur Ducept. Any reproduction without prior written permission is prohibited.',
+        ],
+      },
+    ],
   },
 };
 

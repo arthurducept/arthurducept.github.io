@@ -112,5 +112,15 @@ export interface Translation {
   footer: {
     rights: string;
     madeWith: string;
+    legal: string;
+  };
+  legal: {
+    title: string;
+    updated: string;
+    sections: {
+      title: string;
+      lines?: { label: string; value: string; href?: string }[];
+      text?: string[];
+    }[];
   };
 }

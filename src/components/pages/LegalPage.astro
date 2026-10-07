@@ -1,0 +1,51 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import type { Translation } from '../../i18n/types';
+
+interface Props {
+  t: Translation;
+}
+
+const { t } = Astro.props;
+const p = t.legal;
+---
+
+<section class="pt-32 pb-24 bg-white">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <SectionTitle title={p.title} />
+      <p class="text-xs text-navy/40 mt-4">{p.updated}</p>
+    </div>
+
+    {p.sections.map((section) => (
+      <div class="mb-12">
+        <h2 class="text-xs tracking-[0.3em] uppercase text-gold mb-4 font-bold">{section.title}</h2>
+
+        {section.lines && (
+          <dl class="space-y-2">
+            {section.lines.map((line) => (
+              <div class="flex flex-col sm:flex-row sm:gap-4">
+                <dt class="sm:w-32 shrink-0 text-sm text-navy/60">{line.label}</dt>
+                <dd class="text-base text-gray-700 font-thin">
+                  {line.href ? (
+                    <a href={line.href} class="hover:text-gold transition-colors underline">{line.value}</a>
+                  ) : (
+                    line.value
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
+
+        {section.text && (
+          <div class="space-y-3">
+            {section.text.map((paragraph) => (
+              <p class="text-base text-gray-700 font-thin leading-relaxed">{paragraph}</p>
+            ))}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+</section>

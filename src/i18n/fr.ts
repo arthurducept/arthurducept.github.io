@@ -160,6 +160,50 @@ const fr: Translation = {
   footer: {
     rights: 'Tous droits réservés.',
     madeWith: 'Construit avec Astro',
+    legal: 'Mentions légales',
+  },
+
+  legal: {
+    title: 'Mentions légales',
+    updated: 'Dernière mise à jour : octobre 2026',
+    sections: [
+      {
+        title: 'Éditeur du site',
+        lines: [
+          { label: 'Nom', value: 'Arthur Ducept, entrepreneur individuel (EI)' },
+          { label: 'Activité', value: 'Développement logiciel en freelance' },
+          { label: 'Adresse', value: '4 square Félix Bloch, 85300 Challans, France' },
+          { label: 'SIRET', value: '943 183 301 00010' },
+          { label: 'Email', value: 'contact@arthurducept.fr', href: 'mailto:contact@arthurducept.fr' },
+        ],
+      },
+      {
+        title: 'Directeur de la publication',
+        lines: [{ label: 'Nom', value: 'Arthur Ducept' }],
+      },
+      {
+        title: 'Hébergement',
+        lines: [
+          { label: 'Hébergeur', value: 'GitHub, Inc. (GitHub Pages)' },
+          { label: 'Adresse', value: '88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis' },
+          { label: 'Site web', value: 'https://pages.github.com', href: 'https://pages.github.com' },
+        ],
+      },
+      {
+        title: 'Données personnelles et cookies',
+        text: [
+          "Ce site n'utilise aucun cookie ni traceur et ne collecte aucune donnée personnelle via des formulaires.",
+          "Si vous m'écrivez par email, votre adresse et votre message servent uniquement à vous répondre et ne sont transmis à aucun tiers. Vous pouvez demander l'accès ou la suppression de ces données à tout moment à contact@arthurducept.fr.",
+          'Les polices et images sont servies depuis ce site. Les liens externes (LinkedIn, GitHub) relèvent des politiques de confidentialité de ces services.',
+        ],
+      },
+      {
+        title: 'Propriété intellectuelle',
+        text: [
+          "Sauf mention contraire, le contenu de ce site (textes, logos, design, code) est la propriété d'Arthur Ducept. Toute reproduction sans autorisation écrite préalable est interdite.",
+        ],
+      },
+    ],
   },
 };
 
