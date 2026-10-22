@@ -35,7 +35,7 @@ const fr: Translation = {
       strongTitle: 'Ce que je manipule au quotidien',
       strongDescription: "La stack sur laquelle je suis le plus productif et le plus impliqué — construite sur 5 ans de production.",
       openToTitle: "Ouvert à & curieux",
-      openToDescription: "Technologies sur lesquelles j'ai une exposition solide et où je serais ravi de prendre une mission, ou que j'apprends activement en parallèle.",
+      openToDescription: "Technologies sur lesquelles j'ai une exposition solide et avec lesquelles je serais ravi de travailler, ou que j'apprends activement en parallèle.",
       openTo: [
         { name: 'Backend', skills: ['Go', 'Rust', 'Python (FastAPI)', 'Bun'] },
         { name: 'Frontend', skills: ['Svelte / SvelteKit', 'Solid.js', 'Qwik'] },
@@ -90,13 +90,13 @@ const fr: Translation = {
     subtitle: 'Ingénieur Logiciel Fullstack',
     ctaContact: 'Me contacter',
     ctaCV: 'Télécharger le CV',
-    available: 'Disponible en freelance & CDI',
+    available: 'Ouvert aux opportunités en CDI',
   },
 
   about: {
     sectionTitle: 'À propos',
-    bio: "Ingénieur logiciel fullstack avec 5 ans d'expérience dans la conception d'applications web à forte valeur ajoutée. Orienté produit, j'attache une grande importance à la qualité du code, à l'architecture logicielle et à la conception d'interfaces intuitives. J'ai travaillé sur des sujets frontend, backend, cloud et systèmes embarqués — toujours avec l'objectif de livrer des solutions robustes dont les équipes peuvent être fières. Ouvert aux missions freelance et aux postes en CDI, en télétravail ou sur Toulouse.",
-    availability: 'Disponible en freelance & CDI',
+    bio: "Ingénieur logiciel fullstack avec 5 ans d'expérience dans la conception d'applications web à forte valeur ajoutée. Orienté produit, j'attache une grande importance à la qualité du code, à l'architecture logicielle et à la conception d'interfaces intuitives. J'ai travaillé sur des sujets frontend, backend, cloud et systèmes embarqués — toujours avec l'objectif de livrer des solutions robustes dont les équipes peuvent être fières. Ouvert aux opportunités en CDI, en télétravail ou sur Toulouse.",
+    availability: 'Ouvert aux opportunités en CDI',
     location: 'Toulouse, France',
     languagesTitle: 'Langues',
     languages: [
@@ -152,7 +152,7 @@ const fr: Translation = {
 
   contact: {
     sectionTitle: 'Travaillons ensemble',
-    description: 'Vous avez un projet ou un poste à pourvoir ? Je serais ravi d\'en discuter. Contactez-moi directement par email ou sur LinkedIn.',
+    description: 'Vous avez un poste à pourvoir ou une opportunité à partager ? Je serais ravi d\'en discuter. Contactez-moi directement par email ou sur LinkedIn.',
     emailLabel: 'Envoyer un email',
     linkedinLabel: 'Me rejoindre sur LinkedIn',
   },
@@ -160,6 +160,43 @@ const fr: Translation = {
   footer: {
     rights: 'Tous droits réservés.',
     madeWith: 'Construit avec Astro',
+    legal: 'Mentions légales',
+  },
+
+  legal: {
+    title: 'Mentions légales',
+    updated: 'Dernière mise à jour : octobre 2026',
+    sections: [
+      {
+        title: 'Éditeur du site (site personnel)',
+        lines: [
+          { label: 'Nom', value: 'Arthur Ducept' },
+          { label: 'Email', value: 'contact@arthurducept.fr', href: 'mailto:contact@arthurducept.fr' },
+        ],
+      },
+      {
+        title: 'Hébergement',
+        lines: [
+          { label: 'Hébergeur', value: 'GitHub, Inc. (GitHub Pages)' },
+          { label: 'Adresse', value: '88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis' },
+          { label: 'Site web', value: 'https://pages.github.com', href: 'https://pages.github.com' },
+        ],
+      },
+      {
+        title: 'Données personnelles et cookies',
+        text: [
+          "Ce site n'utilise aucun cookie ni traceur et ne collecte aucune donnée personnelle via des formulaires.",
+          "Si vous m'écrivez par email, votre adresse et votre message servent uniquement à vous répondre et ne sont transmis à aucun tiers. Vous pouvez demander l'accès ou la suppression de ces données à tout moment à contact@arthurducept.fr.",
+          'Les polices et images sont servies depuis ce site. Les liens externes (LinkedIn, GitHub) relèvent des politiques de confidentialité de ces services.',
+        ],
+      },
+      {
+        title: 'Propriété intellectuelle',
+        text: [
+          "Sauf mention contraire, le contenu de ce site (textes, logos, design, code) est la propriété d'Arthur Ducept. Toute reproduction sans autorisation écrite préalable est interdite.",
+        ],
+      },
+    ],
   },
 };
 
