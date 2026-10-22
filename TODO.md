@@ -10,12 +10,12 @@ Objectif : savoir quand de vraies personnes (pas des bots) visitent le site, san
 - Aucun cookie, aucun stockage local, aucun identifiant persistant. Les visiteurs sont distingués par un hash de l'IP et du user-agent qui change régulièrement ; l'IP n'est pas conservée.
 - Les bots connus sont filtrés (liste de user-agents) et exclus des statistiques.
 - Le tableau de bord est à `https://<code>.goatcounter.com` (pages vues, referrers, pays, navigateurs, tailles d'écran).
-- Tarif et conditions à reverifier sur goatcounter.com : gratuit pour un usage non commercial. Le site faisant la promotion d'une activité freelance, vérifier si l'offre gratuite est autorisée ou s'il faut un abonnement ou un don. Il est aussi possible de l'auto-héberger.
+- Tarif et conditions à reverifier sur goatcounter.com : gratuit pour un usage non commercial (a priori compatible avec un site personnel pour recruteurs, à confirmer). Il est aussi possible de l'auto-héberger.
 
 ### À faire
 
 - [ ] Créer un compte sur https://www.goatcounter.com et choisir un code de site (`<code>.goatcounter.com`).
-- [ ] Vérifier les conditions d'usage (usage commercial) avant d'activer.
+- [ ] Vérifier les conditions d'usage (non commercial) avant d'activer.
 - [ ] Ajouter dans `src/layouts/BaseLayout.astro`, avant `</head>` :
   ```html
   <script data-goatcounter="https://<code>.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -26,5 +26,7 @@ Objectif : savoir quand de vraies personnes (pas des bots) visitent le site, san
 
 ## Mentions légales
 
-- [ ] Téléphone : décider si un numéro (virtuel ou autre) doit être ajouté aux mentions légales. Le texte français le liste pour l'éditeur, mais la jurisprudence européenne admet un autre moyen de contact direct et rapide. Voir la discussion de la PR.
+Le site est positionné comme site personnel non professionnel (contact pour recruteurs) : les mentions légales se limitent à l'éditeur, au contact, à l'hébergeur et aux données personnelles. Aucune mention d'activité freelance n'est affichée.
+
+- [ ] Si le site recommence à proposer des missions freelance (hero, bio, description, page contact), repasser en site professionnel : remettre dans les mentions légales la mention « EI », l'adresse pro, le SIRET, la mention de TVA (art. 293 B du CGI, franchise en base), le directeur de la publication et un moyen de contact téléphonique ou équivalent. Ces éléments sont dans le premier commit de la PR.
 - [ ] Relire les mentions avec les textes officiels (Légifrance, article 1-1 de la LCEN) et mettre à jour la date « Dernière mise à jour » à chaque modification.

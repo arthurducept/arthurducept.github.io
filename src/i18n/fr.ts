@@ -35,7 +35,7 @@ const fr: Translation = {
       strongTitle: 'Ce que je manipule au quotidien',
       strongDescription: "La stack sur laquelle je suis le plus productif et le plus impliqué — construite sur 5 ans de production.",
       openToTitle: "Ouvert à & curieux",
-      openToDescription: "Technologies sur lesquelles j'ai une exposition solide et où je serais ravi de prendre une mission, ou que j'apprends activement en parallèle.",
+      openToDescription: "Technologies sur lesquelles j'ai une exposition solide et avec lesquelles je serais ravi de travailler, ou que j'apprends activement en parallèle.",
       openTo: [
         { name: 'Backend', skills: ['Go', 'Rust', 'Python (FastAPI)', 'Bun'] },
         { name: 'Frontend', skills: ['Svelte / SvelteKit', 'Solid.js', 'Qwik'] },
@@ -90,13 +90,13 @@ const fr: Translation = {
     subtitle: 'Ingénieur Logiciel Fullstack',
     ctaContact: 'Me contacter',
     ctaCV: 'Télécharger le CV',
-    available: 'Disponible en freelance & CDI',
+    available: 'Ouvert aux opportunités en CDI',
   },
 
   about: {
     sectionTitle: 'À propos',
-    bio: "Ingénieur logiciel fullstack avec 5 ans d'expérience dans la conception d'applications web à forte valeur ajoutée. Orienté produit, j'attache une grande importance à la qualité du code, à l'architecture logicielle et à la conception d'interfaces intuitives. J'ai travaillé sur des sujets frontend, backend, cloud et systèmes embarqués — toujours avec l'objectif de livrer des solutions robustes dont les équipes peuvent être fières. Ouvert aux missions freelance et aux postes en CDI, en télétravail ou sur Toulouse.",
-    availability: 'Disponible en freelance & CDI',
+    bio: "Ingénieur logiciel fullstack avec 5 ans d'expérience dans la conception d'applications web à forte valeur ajoutée. Orienté produit, j'attache une grande importance à la qualité du code, à l'architecture logicielle et à la conception d'interfaces intuitives. J'ai travaillé sur des sujets frontend, backend, cloud et systèmes embarqués — toujours avec l'objectif de livrer des solutions robustes dont les équipes peuvent être fières. Ouvert aux opportunités en CDI, en télétravail ou sur Toulouse.",
+    availability: 'Ouvert aux opportunités en CDI',
     location: 'Toulouse, France',
     languagesTitle: 'Langues',
     languages: [
@@ -152,7 +152,7 @@ const fr: Translation = {
 
   contact: {
     sectionTitle: 'Travaillons ensemble',
-    description: 'Vous avez un projet ou un poste à pourvoir ? Je serais ravi d\'en discuter. Contactez-moi directement par email ou sur LinkedIn.',
+    description: 'Vous avez un poste à pourvoir ou une opportunité à partager ? Je serais ravi d\'en discuter. Contactez-moi directement par email ou sur LinkedIn.',
     emailLabel: 'Envoyer un email',
     linkedinLabel: 'Me rejoindre sur LinkedIn',
   },
@@ -168,19 +168,11 @@ const fr: Translation = {
     updated: 'Dernière mise à jour : octobre 2026',
     sections: [
       {
-        title: 'Éditeur du site',
+        title: 'Éditeur du site (site personnel)',
         lines: [
-          { label: 'Nom', value: 'Arthur Ducept, entrepreneur individuel (EI)' },
-          { label: 'Activité', value: 'Développement logiciel en freelance' },
-          { label: 'Adresse', value: '4 square Félix Bloch, 85300 Challans, France' },
-          { label: 'SIRET', value: '943 183 301 00010' },
-          { label: 'TVA', value: 'TVA non applicable, art. 293 B du CGI' },
+          { label: 'Nom', value: 'Arthur Ducept' },
           { label: 'Email', value: 'contact@arthurducept.fr', href: 'mailto:contact@arthurducept.fr' },
         ],
-      },
-      {
-        title: 'Directeur de la publication',
-        lines: [{ label: 'Nom', value: 'Arthur Ducept' }],
       },
       {
         title: 'Hébergement',

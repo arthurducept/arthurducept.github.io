@@ -35,7 +35,7 @@ const en: Translation = {
       strongTitle: 'What I work with daily',
       strongDescription: 'The stack I am most productive and opinionated about — built up across 5 years of production work.',
       openToTitle: 'Open to & curious about',
-      openToDescription: 'Tech I have solid exposure to and would be happy to take a mission on, or that I am actively learning on the side.',
+      openToDescription: 'Tech I have solid exposure to and would be happy to work with, or that I am actively learning on the side.',
       openTo: [
         { name: 'Backend', skills: ['Go', 'Rust', 'Python (FastAPI)', 'Bun'] },
         { name: 'Frontend', skills: ['Svelte / SvelteKit', 'Solid.js', 'Qwik'] },
@@ -90,13 +90,13 @@ const en: Translation = {
     subtitle: 'Fullstack Software Engineer',
     ctaContact: 'Get in touch',
     ctaCV: 'Download CV',
-    available: 'Available for freelance & full-time',
+    available: 'Open to full-time opportunities',
   },
 
   about: {
     sectionTitle: 'About me',
-    bio: "I'm a fullstack software engineer with 5 years of experience building web applications that make a real difference. Product-oriented at heart, I care about clean code, scalable architecture, and interfaces that feel intuitive. I've worked across frontend, backend, cloud, and even embedded systems — always with a focus on shipping things that work and that teams are proud of. I'm open to freelance missions and full-time contracts, remote or on-site in Toulouse.",
-    availability: 'Available for freelance & full-time',
+    bio: "I'm a fullstack software engineer with 5 years of experience building web applications that make a real difference. Product-oriented at heart, I care about clean code, scalable architecture, and interfaces that feel intuitive. I've worked across frontend, backend, cloud, and even embedded systems — always with a focus on shipping things that work and that teams are proud of. I'm open to full-time opportunities, remote or on-site in Toulouse.",
+    availability: 'Open to full-time opportunities',
     location: 'Toulouse, France',
     languagesTitle: 'Languages',
     languages: [
@@ -152,7 +152,7 @@ const en: Translation = {
 
   contact: {
     sectionTitle: "Let's work together",
-    description: "Have a project in mind or a position to fill? I'd love to hear about it. Reach out directly by email or connect on LinkedIn.",
+    description: "Have a position to fill or an opportunity to share? I'd love to hear about it. Reach out directly by email or connect on LinkedIn.",
     emailLabel: 'Send an email',
     linkedinLabel: 'Connect on LinkedIn',
   },
@@ -168,19 +168,11 @@ const en: Translation = {
     updated: 'Last updated: October 2026',
     sections: [
       {
-        title: 'Publisher',
+        title: 'Publisher (personal website)',
         lines: [
-          { label: 'Name', value: 'Arthur Ducept, entrepreneur individuel (EI)' },
-          { label: 'Activity', value: 'Freelance software development' },
-          { label: 'Address', value: '4 square Félix Bloch, 85300 Challans, France' },
-          { label: 'SIRET', value: '943 183 301 00010' },
-          { label: 'VAT', value: 'VAT not applicable, art. 293 B of the French General Tax Code' },
+          { label: 'Name', value: 'Arthur Ducept' },
           { label: 'Email', value: 'contact@arthurducept.fr', href: 'mailto:contact@arthurducept.fr' },
         ],
-      },
-      {
-        title: 'Publication director',
-        lines: [{ label: 'Name', value: 'Arthur Ducept' }],
       },
       {
         title: 'Hosting',
